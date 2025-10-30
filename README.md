@@ -15,6 +15,7 @@ upi-gateway
 ## Requirements
 - Node.js (16+ recommended)
 - Angular CLI (for `ng serve`) — optional if using IDE or StackBlitz
+- uses supabase database
 
 ## Setup
 ```bash
