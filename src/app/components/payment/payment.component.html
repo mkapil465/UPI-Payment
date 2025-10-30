@@ -1,0 +1,90 @@
+<div class="payment-container">
+  <header class="header">
+    <div class="header-content">
+      <button class="btn-back" (click)="goBack()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Back
+      </button>
+      <h1>Send Money</h1>
+      <div></div>
+    </div>
+  </header>
+
+  <div class="payment-content">
+    <div class="payment-card">
+      <div class="card-header">
+        <div class="icon-wrapper">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </div>
+        <h2>Transfer Funds</h2>
+        <p>Enter recipient details to complete the transaction</p>
+      </div>
+
+      <form (ngSubmit)="onSubmit()" class="payment-form">
+        <div class="form-group">
+          <label for="recipientUpiId">Recipient UPI ID *</label>
+          <input
+            type="text"
+            id="recipientUpiId"
+            [(ngModel)]="recipientUpiId"
+            name="recipientUpiId"
+            placeholder="username@bankname"
+            (blur)="validateUpiId()"
+            required
+            [disabled]="isLoading"
+            [class.error]="upiIdError"
+          />
+          <span *ngIf="upiIdError" class="field-error">{{ upiIdError }}</span>
+          <span class="help-text">Example: user1&#64;paytm, user2&#64;phonepe, user3&#64;gpay</span>
+        </div>
+
+        <div class="form-group">
+          <label for="amount">Amount *</label>
+          <div class="amount-input-wrapper">
+            <span class="currency-symbol">₹</span>
+            <input
+              type="number"
+              id="amount"
+              [(ngModel)]="amount"
+              name="amount"
+              placeholder="0.00"
+              min="0.01"
+              step="0.01"
+              required
+              [disabled]="isLoading"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Notes (Optional)</label>
+          <textarea
+            id="notes"
+            [(ngModel)]="notes"
+            name="notes"
+            placeholder="Add a note for this transaction"
+            rows="3"
+            [disabled]="isLoading"
+          ></textarea>
+        </div>
+
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+
+        <div *ngIf="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="isLoading || upiIdError">
+          {{ isLoading ? 'Processing...' : 'Send Money' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

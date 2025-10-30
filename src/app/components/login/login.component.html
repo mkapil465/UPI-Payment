@@ -1,0 +1,50 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-section">
+      <h1>WowPe</h1>
+      <p>UPI Payment Gateway</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          [disabled]="isLoading"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+          [disabled]="isLoading"
+        />
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn-primary" [disabled]="isLoading">
+        {{ isLoading ? 'Logging in...' : 'Login' }}
+      </button>
+
+      <div class="demo-credentials">
+        <p><strong>Demo Credentials:</strong></p>
+        <p>Email: user1&#64;example.com</p>
+        <p>Password: password123</p>
+      </div>
+    </form>
+  </div>
+</div>
